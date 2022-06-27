@@ -8,5 +8,5 @@ import java.util.List;
 
 @Mapper
 public interface JobInfoDao extends BaseMapper<JobInfoEntity> {
-    List<JobInfoEntity> selectAllJobs();
+//    List<JobInfoEntity> selectAllJobs();
 }

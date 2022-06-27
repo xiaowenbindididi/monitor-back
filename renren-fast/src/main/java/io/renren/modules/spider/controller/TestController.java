@@ -1,6 +1,9 @@
 package io.renren.modules.spider.controller;
 
 
+import io.renren.common.utils.Constant;
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
 import io.renren.modules.spider.entity.JobDetailVo;
 import io.renren.modules.spider.entity.JobInfoEntity;
 import io.renren.modules.spider.service.JobDetailService;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author xwb
@@ -32,9 +36,9 @@ public class TestController {
     @ApiOperation(value = "返回所有任务信息")
     @PostMapping("/getJobs")
     @ResponseBody
-    public List<JobInfoEntity> getAllJobs() {
-        List<JobInfoEntity> allJobs = jobInfoService.getAllJob();
-        return allJobs;
+    public R list(@RequestParam Map<String, Object> params){
+        PageUtils page = jobInfoService.queryPage(params);
+        return R.ok().put("page", page);
     }
 
     @ApiOperation("给出任务id，查找对应任务的开始时间，结束时间，指标,没查到返回null")
