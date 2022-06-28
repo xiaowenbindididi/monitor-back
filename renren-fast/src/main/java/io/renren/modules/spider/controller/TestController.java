@@ -36,7 +36,7 @@ public class TestController {
     @ApiOperation(value = "返回所有任务信息")
     @PostMapping("/getJobs")
     @ResponseBody
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = jobInfoService.queryPage(params);
         return R.ok().put("page", page);
     }
@@ -45,9 +45,12 @@ public class TestController {
     @PostMapping("/getJD")
     @ResponseBody
     @ApiParam(name = "jobId", value = "形如：standard或者jp_umin_daily")
-    public JobDetailVo getJobDetail(@ApiParam(name = "jobId", value = "形如：standard或者jp_umin_daily")
-                                    @RequestParam(value = "jobId", required = true) String jobId) {
+    public R getJobDetail(@ApiParam(name = "jobId", value = "形如：standard或者jp_umin_daily")
+                          @RequestParam(value = "jobId", required = true) String jobId) {
         JobDetailVo jobDetail = jobDetailService.getJobDetail(jobId);
-        return jobDetail;
+        if (jobDetail == null) {
+            return R.error("error");
+        }
+        return R.ok().put("detail", jobDetail);
     }
 }

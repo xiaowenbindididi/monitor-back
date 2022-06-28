@@ -30,7 +30,8 @@ public class JobInfoEntity {
     @TableField(value = "Associated_project")
     String relatedProject;
     @ApiModelProperty(name = "产品负责人",value = "一个或多个")
-    List<String> productOwner;
+    @TableField(value = "product_owner")
+    String productOwner;
     @ApiModelProperty(name = "开发负责人",value = "一个或多个")
     String developer;
     @ApiModelProperty(name = "运维负责人",value = "一个或多个")
@@ -43,6 +44,7 @@ public class JobInfoEntity {
     String config;
     @ApiModelProperty(name = "下次运行时间",value = "Date时间格式")
     Date nextStartTime;
-//    @ApiModelProperty(name = "描述信息")
-//    String desc;
+    @ApiModelProperty(name = "描述信息")
+    @TableField(value = "job_desc")
+    String jobDesc;
 }
