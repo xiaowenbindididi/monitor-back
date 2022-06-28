@@ -1,8 +1,9 @@
 package io.renren.modules.spider.service;
 
 
+import io.renren.modules.spider.entity.JobDetailPojo;
 import io.renren.modules.spider.entity.JobDetailVo;
 
 public interface JobDetailService {
-    JobDetailVo getJobDetail(String jobId);
+    JobDetailPojo getJobDetail(String jobId);
 }

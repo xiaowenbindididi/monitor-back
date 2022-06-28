@@ -20,7 +20,7 @@ public class JobDetailServiceImpl implements JobDetailService {
     private JobDetailDao jobDetailDao;
 
     @Override
-    public JobDetailVo getJobDetail(String jobId) {
+    public JobDetailPojo getJobDetail(String jobId) {
         if (jobId == null || jobId.length() == 0) {
             return null;
         }
@@ -28,9 +28,13 @@ public class JobDetailServiceImpl implements JobDetailService {
         if (jobDetailPojo == null) {
             return null;
         }
-        JobDetailVo jobDetailVo = new JobDetailVo();
-        BeanUtils.copyProperties(jobDetailPojo,jobDetailVo,"metrics");
-        jobDetailVo.setMetrics(JSON.parseObject(jobDetailPojo.getMetrics(), Map.class));
-        return jobDetailVo;
+        String metrics = jobDetailPojo.getMetrics();
+        if (metrics != null && metrics.length() > 0) {
+            StringBuilder stringBuilder = new StringBuilder(metrics);
+            stringBuilder.deleteCharAt(0);
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+            jobDetailPojo.setMetrics(stringBuilder.toString());
+        }
+        return jobDetailPojo;
     }
 }

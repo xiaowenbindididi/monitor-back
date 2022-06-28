@@ -4,6 +4,7 @@ package io.renren.modules.spider.controller;
 import io.renren.common.utils.Constant;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
+import io.renren.modules.spider.entity.JobDetailPojo;
 import io.renren.modules.spider.entity.JobDetailVo;
 import io.renren.modules.spider.entity.JobInfoEntity;
 import io.renren.modules.spider.service.JobDetailService;
@@ -47,7 +48,7 @@ public class TestController {
     @ApiParam(name = "jobId", value = "形如：standard或者jp_umin_daily")
     public R getJobDetail(@ApiParam(name = "jobId", value = "形如：standard或者jp_umin_daily")
                           @RequestParam(value = "jobId", required = true) String jobId) {
-        JobDetailVo jobDetail = jobDetailService.getJobDetail(jobId);
+        JobDetailPojo jobDetail = jobDetailService.getJobDetail(jobId);
         if (jobDetail == null) {
             return R.error("error");
         }

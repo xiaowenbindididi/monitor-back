@@ -28,7 +28,7 @@ public class JobInfoServiceImpl extends ServiceImpl<JobInfoDao, JobInfoEntity> i
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<JobInfoEntity> page = this.page(
-                new Query<JobInfoEntity>().getPage(params)
+                new Query<JobInfoEntity>().getPage(params,"status",false)
         );
         return new PageUtils(page);
     }
