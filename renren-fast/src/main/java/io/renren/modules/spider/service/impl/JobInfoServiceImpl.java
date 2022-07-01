@@ -20,15 +20,10 @@ import java.util.Map;
 
 @Service("jobInfoService")
 public class JobInfoServiceImpl extends ServiceImpl<JobInfoDao, JobInfoEntity> implements JobInfoService {
-    @Resource
-    private JobInfoDao jobInfoDao;
-    @Resource
-    private SortUtils sortUtils;
-
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<JobInfoEntity> page = this.page(
-                new Query<JobInfoEntity>().getPage(params,"status",false)
+                new Query<JobInfoEntity>().getPage(params,"id",true)
         );
         return new PageUtils(page);
     }

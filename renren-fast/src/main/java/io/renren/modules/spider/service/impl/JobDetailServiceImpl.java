@@ -8,6 +8,7 @@ import io.renren.modules.spider.dao.JobDetailDao;
 import io.renren.modules.spider.entity.JobDetailPojo;
 import io.renren.modules.spider.entity.JobDetailVo;
 import io.renren.modules.spider.service.JobDetailService;
+import io.renren.modules.spider.utils.JobMetricsUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,8 @@ import java.util.Map;
 public class JobDetailServiceImpl implements JobDetailService {
     @Resource
     private JobDetailDao jobDetailDao;
+    @Resource
+    private JobMetricsUtils jobMetricsUtils;
 
     @Override
     public JobDetailPojo getJobDetail(String jobId) {
@@ -33,7 +36,7 @@ public class JobDetailServiceImpl implements JobDetailService {
             StringBuilder stringBuilder = new StringBuilder(metrics);
             stringBuilder.deleteCharAt(0);
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-            jobDetailPojo.setMetrics(stringBuilder.toString());
+            jobDetailPojo.setMetrics(jobMetricsUtils.metricsResult(stringBuilder.toString()));
         }
         return jobDetailPojo;
     }

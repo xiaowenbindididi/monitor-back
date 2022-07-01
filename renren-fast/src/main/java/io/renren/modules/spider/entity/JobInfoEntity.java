@@ -4,16 +4,18 @@ package io.renren.modules.spider.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Data
 @ApiModel(value = "job对象",description = "描述任务信息")
-@TableName("job")
+@TableName(value = "job",resultMap = "jobInfoMap")
 public class JobInfoEntity {
     @TableId
     long id;
@@ -25,7 +27,8 @@ public class JobInfoEntity {
     int status;
     @ApiModelProperty(name = "创建时间",value = "Date时间格式")
     @TableField(value = "job_create_time")
-    Date createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    Timestamp createTime;
     @ApiModelProperty(name = "关联项目",value = "一个或多个")
     @TableField(value = "Associated_project")
     String relatedProject;
@@ -39,11 +42,9 @@ public class JobInfoEntity {
     String maintainer;
     @ApiModelProperty(name = "任务类型",value = "0:代表一次性，1代表周期性")
     int jobType;
-    @ApiModelProperty(name = "cron配置信息")
-    @TableField(value = "cron_config")
-    String config;
     @ApiModelProperty(name = "下次运行时间",value = "Date时间格式")
-    Date nextStartTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    Timestamp nextStartTime;
     @ApiModelProperty(name = "描述信息")
     @TableField(value = "job_desc")
     String jobDesc;
