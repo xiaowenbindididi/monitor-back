@@ -49,7 +49,7 @@ public class TestController {
                           @RequestParam(value = "jobId", required = true) String jobId) {
         JobDetailPojo jobDetail = jobDetailService.getJobDetail(jobId);
         if (jobDetail == null) {
-            return R.error("error");
+            return R.ok("没取到数据");
         }
         return R.ok().put("detail", jobDetail);
     }
